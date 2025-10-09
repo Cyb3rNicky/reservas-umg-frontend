@@ -1,5 +1,7 @@
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { useNavigate } from 'react-router-dom';
+import { getUser, logout } from '../services/auth';
 
 const user = {
   name: 'Tom Cook',
@@ -14,17 +16,21 @@ const navigation = [
   { name: 'Calendar', href: '#', current: false },
   { name: 'Reports', href: '#', current: false },
 ]
-const userNavigation = [
-  { name: 'Your profile', href: '#' },
-  { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '#' },
-]
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 export default function Dashboard() {
+
+  const navigate = useNavigate();
+  const user = getUser();
+
+  const onLogout = () => {
+    logout();
+    navigate('/', { replace: true });
+  };
+
   return (
     <>
       <div className="min-h-full">
@@ -88,16 +94,15 @@ export default function Dashboard() {
                           transition
                           className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg outline-1 outline-black/5 transition data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
                         >
-                          {userNavigation.map((item) => (
-                            <MenuItem key={item.name}>
+                            <MenuItem>
                               <a
-                                href={item.href}
+                                onClick={onLogout}
                                 className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                               >
-                                {item.name}
+                                Cerrar sesión
                               </a>
                             </MenuItem>
-                          ))}
+                         
                         </MenuItems>
                       </Menu>
                     </div>
@@ -155,16 +160,13 @@ export default function Dashboard() {
                   </button>
                 </div>
                 <div className="mt-3 space-y-1 px-2">
-                  {userNavigation.map((item) => (
                     <DisclosureButton
-                      key={item.name}
                       as="a"
-                      href={item.href}
+                      onClick={onLogout}
                       className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-white/5 hover:text-white"
                     >
-                      {item.name}
+                      Cerrar sesión
                     </DisclosureButton>
-                  ))}
                 </div>
               </div>
             </DisclosurePanel>
