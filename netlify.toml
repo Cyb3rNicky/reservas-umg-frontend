@@ -1,0 +1,19 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Redirección para SPA: cualquier ruta -> index.html
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# (Opcional) variables por contexto
+[context.production.environment]
+  VITE_API_URL = "https://reservas-umg-backend.onrender.com"
+
+[context.deploy-preview.environment]
+  VITE_API_URL = "https://reservas-umg-backend.onrender.com"
