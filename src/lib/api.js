@@ -1,3 +1,4 @@
+// lib/api.js
 import { ENV } from '../config/env';
 
 function getToken() {
@@ -17,12 +18,13 @@ async function request(path, { method = 'GET', body, auth = false } = {}) {
     body: body ? JSON.stringify(body) : undefined,
   });
 
-  // Parse JSON si puede
   const text = await res.text();
-  const data = text ? JSON.parse(text) : null;
+  const data = text ? (() => { try { return JSON.parse(text); } catch { return text; } })() : null;
 
   if (!res.ok) {
-    const message = data?.error || data?.message || `HTTP ${res.status}`;
+    const message =
+      (typeof data === 'object' && (data?.error || data?.message)) ||
+      `HTTP ${res.status} ${res.statusText}`;
     throw new Error(message);
   }
 
@@ -32,4 +34,6 @@ async function request(path, { method = 'GET', body, auth = false } = {}) {
 export const api = {
   get: (path, opts = {}) => request(path, { ...opts, method: 'GET' }),
   post: (path, body, opts = {}) => request(path, { ...opts, method: 'POST', body }),
+  put: (path, body, opts = {}) => request(path, { ...opts, method: 'PUT', body }),
+  delete: (path, opts = {}) => request(path, { ...opts, method: 'DELETE' }),
 };

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { register as registerApi } from '../services/auth';
+import Logo from '../../public/logo_umg.png';
 
 export default function Register() {
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ export default function Register() {
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <img
           alt="Your Company"
-          src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
+          src={Logo}
           className="mx-auto h-10 w-auto"
         />
         <h2 className="mt-6 text-center text-2xl font-bold tracking-tight text-gray-900">

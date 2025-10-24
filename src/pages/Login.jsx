@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../services/auth';
+import Logo from '../../public/logo_umg.png';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ export default function Login() {
           <div>
             <img
               alt="Reservas UMG"
-              src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
+              src={Logo}
               className="h-10 w-auto"
             />
             <h2 className="mt-8 text-2xl font-bold tracking-tight text-gray-900">
