@@ -10,6 +10,8 @@ import Home from './pages/Home';
 import EventosIndex from './pages/eventos/Index';
 import EventosCreate from './pages/eventos/Create';
 import EventosEdit from './pages/eventos/Edit';
+import ReservasIndex from './pages/reservas/Index';
+import BoletosIndex from './pages/boletos/Index';
 
 export const router = createBrowserRouter([
   { path: '/', element: <Login /> },
@@ -22,6 +24,8 @@ export const router = createBrowserRouter([
         element: <DashboardLayout />,
         children: [
           { path: '/eventos', element: <Home /> },
+          { path: '/reservas', element: <ReservasIndex /> },
+          { path: '/boletos', element: <BoletosIndex /> },
 
           {
             element: <AdminRoute />,

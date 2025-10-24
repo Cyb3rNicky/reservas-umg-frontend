@@ -17,7 +17,7 @@ export default function Login() {
     setLoading(true);
     try {
       await login(form);
-      navigate('/dashboard');
+      navigate('/eventos');
     } catch (error) {
       setErr(error.message || 'Error de login');
     } finally {

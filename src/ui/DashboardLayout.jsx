@@ -26,6 +26,8 @@ export default function DashboardLayout() {
   // Navegación dinámica según rol
   const navigation = [
     { name: 'Eventos', href: '/eventos' },
+    { name: 'Mis Reservas', href: '/reservas' },
+    { name: 'Mis Boletos', href: '/boletos' },
     ...(isAdmin ? [{ name: 'Administrar Eventos', href: '/admin/eventos' }] : []),
   ];
 

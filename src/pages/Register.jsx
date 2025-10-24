@@ -17,7 +17,7 @@ export default function Register() {
     setLoading(true);
     try {
       await registerApi({ ...form, rol: 'usuario' });
-      navigate('/dashboard');
+      navigate('/eventos');
     } catch (error) {
       setErr(error.message || 'Error de registro');
     } finally {
